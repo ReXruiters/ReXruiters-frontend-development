@@ -4,7 +4,7 @@ import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 import { Label } from '@/app/components/ui/label';
 import { Checkbox } from '@/app/components/ui/checkbox';
-import logoImage from 'figma:asset/c2812c1c57b7f108fcb4af39eaa6cb50ec1bdd69.png';
+import logoImage from '@/assets/rexruiter-logo.png';
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();

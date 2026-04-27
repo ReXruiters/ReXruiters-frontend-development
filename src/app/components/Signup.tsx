@@ -1,100 +1,121 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
-import { Button } from '@/app/components/ui/button';
-import { Input } from '@/app/components/ui/input';
-import { Label } from '@/app/components/ui/label';
-import { Textarea } from '@/app/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/app/components/ui/select';
-import { RadioGroup, RadioGroupItem } from '@/app/components/ui/radio-group';
-import { Checkbox } from '@/app/components/ui/checkbox';
-import { Building2, User, Check, Globe, Mail, Briefcase, Target } from 'lucide-react';
-import logoImage from 'figma:asset/3652bbb3d862ef5d1f8e73f682be9a5d17342ca4.png';
+import React, { useState } from "react";
+import { useNavigate } from "react-router";
+import { Button } from "@/app/components/ui/button";
+import { Input } from "@/app/components/ui/input";
+import { Label } from "@/app/components/ui/label";
+import { Textarea } from "@/app/components/ui/textarea";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/app/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/app/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/app/components/ui/radio-group";
+import { Checkbox } from "@/app/components/ui/checkbox";
+import {
+  Building2,
+  User,
+  Check,
+  Globe,
+  Mail,
+  Briefcase,
+  Target,
+} from "lucide-react";
+import logoImage from "@/assets/x-logo.png";
 
 const INDUSTRIES = [
-  'Technology',
-  'Healthcare',
-  'Finance',
-  'Education',
-  'Retail',
-  'Manufacturing',
-  'Consulting',
-  'Marketing',
-  'Real Estate',
-  'Other'
+  "Technology",
+  "Healthcare",
+  "Finance",
+  "Education",
+  "Retail",
+  "Manufacturing",
+  "Consulting",
+  "Marketing",
+  "Real Estate",
+  "Other",
 ];
 
 const COMPANY_SIZES = [
-  '1-10 employees',
-  '11-50 employees',
-  '51-200 employees',
-  '201-500 employees',
-  '501-1000 employees',
-  '1000+ employees'
+  "1-10 employees",
+  "11-50 employees",
+  "51-200 employees",
+  "201-500 employees",
+  "501-1000 employees",
+  "1000+ employees",
 ];
 
 const PERSONALITY_TRAITS = [
-  'Needs constant direction',
-  'Avoids conflict',
-  'Overly analytical',
-  'Risk-averse',
-  'Highly dominant',
-  'Emotionally reactive'
+  "Needs constant direction",
+  "Avoids conflict",
+  "Overly analytical",
+  "Risk-averse",
+  "Highly dominant",
+  "Emotionally reactive",
 ];
 
 export const Signup: React.FC = () => {
   const navigate = useNavigate();
-  const [step, setStep] = useState<'account' | 'profile' | 'onboarding'>('account');
+  const [step, setStep] = useState<"account" | "profile" | "onboarding">(
+    "account",
+  );
 
   // Account fields
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   // Profile fields - Step 2
-  const [employerName, setEmployerName] = useState('');
-  const [companyWebsite, setCompanyWebsite] = useState('');
-  const [pointOfContact, setPointOfContact] = useState('');
-  const [contactEmail, setContactEmail] = useState('');
-  const [jobTitle, setJobTitle] = useState('');
-  const [companySize, setCompanySize] = useState('');
-  const [companyIndustry, setCompanyIndustry] = useState('');
+  const [employerName, setEmployerName] = useState("");
+  const [companyWebsite, setCompanyWebsite] = useState("");
+  const [pointOfContact, setPointOfContact] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [companySize, setCompanySize] = useState("");
+  const [companyIndustry, setCompanyIndustry] = useState("");
 
   // Onboarding fields - Step 3
-  const [operatingStyle, setOperatingStyle] = useState('');
-  const [speedQualityTradeoff, setSpeedQualityTradeoff] = useState('');
-  const [ownershipExpectation, setOwnershipExpectation] = useState('');
-  const [decisionMaking, setDecisionMaking] = useState('');
-  const [communicationCulture, setCommunicationCulture] = useState('');
+  const [operatingStyle, setOperatingStyle] = useState("");
+  const [speedQualityTradeoff, setSpeedQualityTradeoff] = useState("");
+  const [ownershipExpectation, setOwnershipExpectation] = useState("");
+  const [decisionMaking, setDecisionMaking] = useState("");
+  const [communicationCulture, setCommunicationCulture] = useState("");
   const [personalityMismatch, setPersonalityMismatch] = useState<string[]>([]);
-  const [highPerformerDefinition, setHighPerformerDefinition] = useState('');
-  const [missionVision, setMissionVision] = useState('');
+  const [highPerformerDefinition, setHighPerformerDefinition] = useState("");
+  const [missionVision, setMissionVision] = useState("");
 
   // Calculate progress percentage
   const getProgressPercentage = () => {
-    if (step === 'account') return 33;
-    if (step === 'profile') return 66;
+    if (step === "account") return 33;
+    if (step === "profile") return 66;
     return 100;
   };
 
   const handleAccountSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert('Passwords do not match!');
+      alert("Passwords do not match!");
       return;
     }
-    setStep('profile');
+    setStep("profile");
   };
 
   const handleProfileSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setStep('onboarding');
+    setStep("onboarding");
   };
 
   const togglePersonalityMismatch = (trait: string) => {
-    setPersonalityMismatch(prev => {
+    setPersonalityMismatch((prev) => {
       if (prev.includes(trait)) {
-        return prev.filter(t => t !== trait);
+        return prev.filter((t) => t !== trait);
       }
       if (prev.length < 2) {
         return [...prev, trait];
@@ -107,11 +128,14 @@ export const Signup: React.FC = () => {
     e.preventDefault();
     // Save all data to context/backend
     // For now, navigate to dashboard
-    navigate('/');
+    navigate("/");
   };
 
   const wordCount = (text: string) => {
-    return text.trim().split(/\s+/).filter(word => word.length > 0).length;
+    return text
+      .trim()
+      .split(/\s+/)
+      .filter((word) => word.length > 0).length;
   };
 
   return (
@@ -121,61 +145,96 @@ export const Signup: React.FC = () => {
         <div className="w-full max-w-2xl space-y-8 py-8">
           {/* Logo */}
           <div>
-            <img src={logoImage} alt="ReXruiters" className="h-16 w-auto mb-8" />
+            <img
+              src={logoImage}
+              alt="ReXruiters"
+              className="h-16 w-auto mb-8"
+            />
             <h1 className="text-4xl font-bold text-gray-900 mb-2">
-              {step === 'account' && 'Create Your Account'}
-              {step === 'profile' && 'Complete Your Profile'}
-              {step === 'onboarding' && 'Company Culture & Preferences'}
+              {step === "account" && "Create Your Account"}
+              {step === "profile" && "Complete Your Profile"}
+              {step === "onboarding" && "Company Culture & Preferences"}
             </h1>
             <p className="text-gray-600">
-              {step === 'account' && 'Join ReXruiters and start hiring smarter'}
-              {step === 'profile' && 'Tell us about yourself and your company'}
-              {step === 'onboarding' && 'Help us understand your company culture'}
+              {step === "account" && "Join ReXruiters and start hiring smarter"}
+              {step === "profile" && "Tell us about yourself and your company"}
+              {step === "onboarding" &&
+                "Help us understand your company culture"}
             </p>
           </div>
 
           {/* Progress Bar */}
           <div className="space-y-3">
             <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-              <div 
+              <div
                 className="h-full bg-gradient-to-r from-red-500 to-red-600 transition-all duration-500 ease-out"
                 style={{ width: `${getProgressPercentage()}%` }}
               />
             </div>
-            
+
             {/* Progress Indicator */}
             <div className="flex items-center justify-center gap-3">
               <div className="flex items-center gap-2">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                  step === 'account' ? 'bg-red-600 text-white' : 'bg-green-600 text-white'
-                }`}>
-                  {step !== 'account' ? <Check className="w-5 h-5" /> : '1'}
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                    step === "account"
+                      ? "bg-red-600 text-white"
+                      : "bg-green-600 text-white"
+                  }`}
+                >
+                  {step !== "account" ? <Check className="w-5 h-5" /> : "1"}
                 </div>
-                <span className={step === 'account' ? 'font-semibold text-gray-900' : 'text-gray-600'}>
+                <span
+                  className={
+                    step === "account"
+                      ? "font-semibold text-gray-900"
+                      : "text-gray-600"
+                  }
+                >
                   Account
                 </span>
               </div>
               <div className="w-12 h-0.5 bg-gray-300"></div>
               <div className="flex items-center gap-2">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                  step === 'profile' ? 'bg-red-600 text-white' : 
-                  step === 'onboarding' ? 'bg-green-600 text-white' : 
-                  'bg-gray-200 text-gray-600'
-                }`}>
-                  {step === 'onboarding' ? <Check className="w-5 h-5" /> : '2'}
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                    step === "profile"
+                      ? "bg-red-600 text-white"
+                      : step === "onboarding"
+                        ? "bg-green-600 text-white"
+                        : "bg-gray-200 text-gray-600"
+                  }`}
+                >
+                  {step === "onboarding" ? <Check className="w-5 h-5" /> : "2"}
                 </div>
-                <span className={step === 'profile' ? 'font-semibold text-gray-900' : 'text-gray-600'}>
+                <span
+                  className={
+                    step === "profile"
+                      ? "font-semibold text-gray-900"
+                      : "text-gray-600"
+                  }
+                >
                   Profile
                 </span>
               </div>
               <div className="w-12 h-0.5 bg-gray-300"></div>
               <div className="flex items-center gap-2">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                  step === 'onboarding' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-600'
-                }`}>
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                    step === "onboarding"
+                      ? "bg-red-600 text-white"
+                      : "bg-gray-200 text-gray-600"
+                  }`}
+                >
                   3
                 </div>
-                <span className={step === 'onboarding' ? 'font-semibold text-gray-900' : 'text-gray-600'}>
+                <span
+                  className={
+                    step === "onboarding"
+                      ? "font-semibold text-gray-900"
+                      : "text-gray-600"
+                  }
+                >
                   Onboarding
                 </span>
               </div>
@@ -183,7 +242,7 @@ export const Signup: React.FC = () => {
           </div>
 
           {/* Account Creation Form */}
-          {step === 'account' && (
+          {step === "account" && (
             <form onSubmit={handleAccountSubmit} className="space-y-6">
               <Card className="border-2">
                 <CardContent className="pt-6 space-y-4">
@@ -212,7 +271,9 @@ export const Signup: React.FC = () => {
                       required
                       minLength={8}
                     />
-                    <p className="text-xs text-gray-500">At least 8 characters</p>
+                    <p className="text-xs text-gray-500">
+                      At least 8 characters
+                    </p>
                   </div>
 
                   <div className="space-y-2">
@@ -241,7 +302,7 @@ export const Signup: React.FC = () => {
                 <span className="text-gray-600">Already have an account? </span>
                 <button
                   type="button"
-                  onClick={() => navigate('/login')}
+                  onClick={() => navigate("/login")}
                   className="text-red-600 hover:text-red-700 font-semibold"
                 >
                   Login
@@ -251,7 +312,7 @@ export const Signup: React.FC = () => {
           )}
 
           {/* Profile Form - Step 2 */}
-          {step === 'profile' && (
+          {step === "profile" && (
             <form onSubmit={handleProfileSubmit} className="space-y-6">
               <Card className="border-2">
                 <CardHeader>
@@ -335,27 +396,41 @@ export const Signup: React.FC = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="company-size">Company Size *</Label>
-                      <Select value={companySize} onValueChange={setCompanySize} required>
+                      <Select
+                        value={companySize}
+                        onValueChange={setCompanySize}
+                        required
+                      >
                         <SelectTrigger className="h-12">
                           <SelectValue placeholder="Select size" />
                         </SelectTrigger>
                         <SelectContent>
-                          {COMPANY_SIZES.map(size => (
-                            <SelectItem key={size} value={size}>{size}</SelectItem>
+                          {COMPANY_SIZES.map((size) => (
+                            <SelectItem key={size} value={size}>
+                              {size}
+                            </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="company-industry">Company Industry *</Label>
-                      <Select value={companyIndustry} onValueChange={setCompanyIndustry} required>
+                      <Label htmlFor="company-industry">
+                        Company Industry *
+                      </Label>
+                      <Select
+                        value={companyIndustry}
+                        onValueChange={setCompanyIndustry}
+                        required
+                      >
                         <SelectTrigger className="h-12">
                           <SelectValue placeholder="Select industry" />
                         </SelectTrigger>
                         <SelectContent>
-                          {INDUSTRIES.map(ind => (
-                            <SelectItem key={ind} value={ind}>{ind}</SelectItem>
+                          {INDUSTRIES.map((ind) => (
+                            <SelectItem key={ind} value={ind}>
+                              {ind}
+                            </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
@@ -368,7 +443,7 @@ export const Signup: React.FC = () => {
                 <Button
                   type="button"
                   variant="outline"
-                  onClick={() => setStep('account')}
+                  onClick={() => setStep("account")}
                   className="flex-1 h-12 border-2"
                 >
                   Back
@@ -384,7 +459,7 @@ export const Signup: React.FC = () => {
           )}
 
           {/* Onboarding Form - Step 3 */}
-          {step === 'onboarding' && (
+          {step === "onboarding" && (
             <form onSubmit={handleOnboardingSubmit} className="space-y-6">
               {/* Company Operating Style */}
               <Card className="border-2">
@@ -393,26 +468,55 @@ export const Signup: React.FC = () => {
                     <Building2 className="w-5 h-5 text-red-600" />
                     Company Operating Style
                   </CardTitle>
-                  <p className="text-sm text-gray-600 mt-1">Your company currently feels more like:</p>
+                  <p className="text-sm text-gray-600 mt-1">
+                    Your company currently feels more like:
+                  </p>
                 </CardHeader>
                 <CardContent>
-                  <RadioGroup value={operatingStyle} onValueChange={setOperatingStyle} required>
+                  <RadioGroup
+                    value={operatingStyle}
+                    onValueChange={setOperatingStyle}
+                    required
+                  >
                     <div className="space-y-3">
                       <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
                         <RadioGroupItem value="chaotic" id="chaotic" />
-                        <Label htmlFor="chaotic" className="cursor-pointer flex-1">Chaotic & fast-moving</Label>
+                        <Label
+                          htmlFor="chaotic"
+                          className="cursor-pointer flex-1"
+                        >
+                          Chaotic & fast-moving
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
                         <RadioGroupItem value="agile" id="agile" />
-                        <Label htmlFor="agile" className="cursor-pointer flex-1">Structured but agile</Label>
+                        <Label
+                          htmlFor="agile"
+                          className="cursor-pointer flex-1"
+                        >
+                          Structured but agile
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
                         <RadioGroupItem value="organized" id="organized" />
-                        <Label htmlFor="organized" className="cursor-pointer flex-1">Process-heavy & organized</Label>
+                        <Label
+                          htmlFor="organized"
+                          className="cursor-pointer flex-1"
+                        >
+                          Process-heavy & organized
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
-                        <RadioGroupItem value="hierarchical" id="hierarchical" />
-                        <Label htmlFor="hierarchical" className="cursor-pointer flex-1">Corporate & hierarchical</Label>
+                        <RadioGroupItem
+                          value="hierarchical"
+                          id="hierarchical"
+                        />
+                        <Label
+                          htmlFor="hierarchical"
+                          className="cursor-pointer flex-1"
+                        >
+                          Corporate & hierarchical
+                        </Label>
                       </div>
                     </div>
                   </RadioGroup>
@@ -423,22 +527,43 @@ export const Signup: React.FC = () => {
               <Card className="border-2">
                 <CardHeader>
                   <CardTitle>Speed vs Quality Trade-off</CardTitle>
-                  <p className="text-sm text-gray-600 mt-1">When deadlines are tight, you prioritize:</p>
+                  <p className="text-sm text-gray-600 mt-1">
+                    When deadlines are tight, you prioritize:
+                  </p>
                 </CardHeader>
                 <CardContent>
-                  <RadioGroup value={speedQualityTradeoff} onValueChange={setSpeedQualityTradeoff} required>
+                  <RadioGroup
+                    value={speedQualityTradeoff}
+                    onValueChange={setSpeedQualityTradeoff}
+                    required
+                  >
                     <div className="space-y-3">
                       <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
                         <RadioGroupItem value="speed" id="speed" />
-                        <Label htmlFor="speed" className="cursor-pointer flex-1">Shipping fast, iterate later</Label>
+                        <Label
+                          htmlFor="speed"
+                          className="cursor-pointer flex-1"
+                        >
+                          Shipping fast, iterate later
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
                         <RadioGroupItem value="balanced" id="balanced" />
-                        <Label htmlFor="balanced" className="cursor-pointer flex-1">Balanced approach</Label>
+                        <Label
+                          htmlFor="balanced"
+                          className="cursor-pointer flex-1"
+                        >
+                          Balanced approach
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
                         <RadioGroupItem value="precision" id="precision" />
-                        <Label htmlFor="precision" className="cursor-pointer flex-1">High precision, minimal errors</Label>
+                        <Label
+                          htmlFor="precision"
+                          className="cursor-pointer flex-1"
+                        >
+                          High precision, minimal errors
+                        </Label>
                       </div>
                     </div>
                   </RadioGroup>
@@ -449,22 +574,40 @@ export const Signup: React.FC = () => {
               <Card className="border-2">
                 <CardHeader>
                   <CardTitle>Ownership Expectation</CardTitle>
-                  <p className="text-sm text-gray-600 mt-1">You expect team members to:</p>
+                  <p className="text-sm text-gray-600 mt-1">
+                    You expect team members to:
+                  </p>
                 </CardHeader>
                 <CardContent>
-                  <RadioGroup value={ownershipExpectation} onValueChange={setOwnershipExpectation} required>
+                  <RadioGroup
+                    value={ownershipExpectation}
+                    onValueChange={setOwnershipExpectation}
+                    required
+                  >
                     <div className="space-y-3">
                       <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
                         <RadioGroupItem value="execute" id="execute" />
-                        <Label htmlFor="execute" className="cursor-pointer flex-1">Execute assigned tasks</Label>
+                        <Label
+                          htmlFor="execute"
+                          className="cursor-pointer flex-1"
+                        >
+                          Execute assigned tasks
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
                         <RadioGroupItem value="manage" id="manage" />
-                        <Label htmlFor="manage" className="cursor-pointer flex-1">Manage projects independently</Label>
+                        <Label
+                          htmlFor="manage"
+                          className="cursor-pointer flex-1"
+                        >
+                          Manage projects independently
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
                         <RadioGroupItem value="own" id="own" />
-                        <Label htmlFor="own" className="cursor-pointer flex-1">Own outcomes without supervision</Label>
+                        <Label htmlFor="own" className="cursor-pointer flex-1">
+                          Own outcomes without supervision
+                        </Label>
                       </div>
                     </div>
                   </RadioGroup>
@@ -475,26 +618,52 @@ export const Signup: React.FC = () => {
               <Card className="border-2">
                 <CardHeader>
                   <CardTitle>Decision-Making Style</CardTitle>
-                  <p className="text-sm text-gray-600 mt-1">Most decisions in your company are:</p>
+                  <p className="text-sm text-gray-600 mt-1">
+                    Most decisions in your company are:
+                  </p>
                 </CardHeader>
                 <CardContent>
-                  <RadioGroup value={decisionMaking} onValueChange={setDecisionMaking} required>
+                  <RadioGroup
+                    value={decisionMaking}
+                    onValueChange={setDecisionMaking}
+                    required
+                  >
                     <div className="space-y-3">
                       <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
                         <RadioGroupItem value="founder-led" id="founder-led" />
-                        <Label htmlFor="founder-led" className="cursor-pointer flex-1">Founder-led</Label>
+                        <Label
+                          htmlFor="founder-led"
+                          className="cursor-pointer flex-1"
+                        >
+                          Founder-led
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
                         <RadioGroupItem value="manager-led" id="manager-led" />
-                        <Label htmlFor="manager-led" className="cursor-pointer flex-1">Manager-led</Label>
+                        <Label
+                          htmlFor="manager-led"
+                          className="cursor-pointer flex-1"
+                        >
+                          Manager-led
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
                         <RadioGroupItem value="consensus" id="consensus" />
-                        <Label htmlFor="consensus" className="cursor-pointer flex-1">Consensus-based</Label>
+                        <Label
+                          htmlFor="consensus"
+                          className="cursor-pointer flex-1"
+                        >
+                          Consensus-based
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
                         <RadioGroupItem value="data-driven" id="data-driven" />
-                        <Label htmlFor="data-driven" className="cursor-pointer flex-1">Data-driven</Label>
+                        <Label
+                          htmlFor="data-driven"
+                          className="cursor-pointer flex-1"
+                        >
+                          Data-driven
+                        </Label>
                       </div>
                     </div>
                   </RadioGroup>
@@ -505,22 +674,46 @@ export const Signup: React.FC = () => {
               <Card className="border-2">
                 <CardHeader>
                   <CardTitle>Communication Culture</CardTitle>
-                  <p className="text-sm text-gray-600 mt-1">Communication in your team is:</p>
+                  <p className="text-sm text-gray-600 mt-1">
+                    Communication in your team is:
+                  </p>
                 </CardHeader>
                 <CardContent>
-                  <RadioGroup value={communicationCulture} onValueChange={setCommunicationCulture} required>
+                  <RadioGroup
+                    value={communicationCulture}
+                    onValueChange={setCommunicationCulture}
+                    required
+                  >
                     <div className="space-y-3">
                       <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
                         <RadioGroupItem value="blunt" id="blunt" />
-                        <Label htmlFor="blunt" className="cursor-pointer flex-1">Very direct & blunt</Label>
+                        <Label
+                          htmlFor="blunt"
+                          className="cursor-pointer flex-1"
+                        >
+                          Very direct & blunt
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
-                        <RadioGroupItem value="direct-respectful" id="direct-respectful" />
-                        <Label htmlFor="direct-respectful" className="cursor-pointer flex-1">Direct but respectful</Label>
+                        <RadioGroupItem
+                          value="direct-respectful"
+                          id="direct-respectful"
+                        />
+                        <Label
+                          htmlFor="direct-respectful"
+                          className="cursor-pointer flex-1"
+                        >
+                          Direct but respectful
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
                         <RadioGroupItem value="diplomatic" id="diplomatic" />
-                        <Label htmlFor="diplomatic" className="cursor-pointer flex-1">Diplomatic & cautious</Label>
+                        <Label
+                          htmlFor="diplomatic"
+                          className="cursor-pointer flex-1"
+                        >
+                          Diplomatic & cautious
+                        </Label>
                       </div>
                     </div>
                   </RadioGroup>
@@ -531,20 +724,30 @@ export const Signup: React.FC = () => {
               <Card className="border-2">
                 <CardHeader>
                   <CardTitle>Personality Mismatch</CardTitle>
-                  <p className="text-sm text-gray-600 mt-1">Select up to 2 traits that usually struggle in your culture:</p>
+                  <p className="text-sm text-gray-600 mt-1">
+                    Select up to 2 traits that usually struggle in your culture:
+                  </p>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
-                    {PERSONALITY_TRAITS.map(trait => (
-                      <div key={trait} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50">
+                    {PERSONALITY_TRAITS.map((trait) => (
+                      <div
+                        key={trait}
+                        className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50"
+                      >
                         <Checkbox
                           id={trait}
                           checked={personalityMismatch.includes(trait)}
-                          onCheckedChange={() => togglePersonalityMismatch(trait)}
-                          disabled={!personalityMismatch.includes(trait) && personalityMismatch.length >= 2}
+                          onCheckedChange={() =>
+                            togglePersonalityMismatch(trait)
+                          }
+                          disabled={
+                            !personalityMismatch.includes(trait) &&
+                            personalityMismatch.length >= 2
+                          }
                         />
-                        <Label 
-                          htmlFor={trait} 
+                        <Label
+                          htmlFor={trait}
                           className="cursor-pointer flex-1"
                         >
                           {trait}
@@ -565,7 +768,10 @@ export const Signup: React.FC = () => {
                     <Target className="w-5 h-5 text-red-600" />
                     High Performer Definition
                   </CardTitle>
-                  <p className="text-sm text-gray-600 mt-1">In one or two sentences: What makes someone exceptional in your company?</p>
+                  <p className="text-sm text-gray-600 mt-1">
+                    In one or two sentences: What makes someone exceptional in
+                    your company?
+                  </p>
                 </CardHeader>
                 <CardContent>
                   <Textarea
@@ -575,7 +781,9 @@ export const Signup: React.FC = () => {
                     className="min-h-[100px] resize-none"
                     required
                   />
-                  <p className={`text-xs mt-2 ${wordCount(highPerformerDefinition) > 150 ? 'text-red-600' : 'text-gray-500'}`}>
+                  <p
+                    className={`text-xs mt-2 ${wordCount(highPerformerDefinition) > 150 ? "text-red-600" : "text-gray-500"}`}
+                  >
                     {wordCount(highPerformerDefinition)}/150 words
                   </p>
                 </CardContent>
@@ -585,7 +793,9 @@ export const Signup: React.FC = () => {
               <Card className="border-2">
                 <CardHeader>
                   <CardTitle>Company Mission and Vision</CardTitle>
-                  <p className="text-sm text-gray-600 mt-1">Explain your company's mission and vision:</p>
+                  <p className="text-sm text-gray-600 mt-1">
+                    Explain your company's mission and vision:
+                  </p>
                 </CardHeader>
                 <CardContent>
                   <Textarea
@@ -595,7 +805,9 @@ export const Signup: React.FC = () => {
                     className="min-h-[100px] resize-none"
                     required
                   />
-                  <p className={`text-xs mt-2 ${wordCount(missionVision) > 150 ? 'text-red-600' : 'text-gray-500'}`}>
+                  <p
+                    className={`text-xs mt-2 ${wordCount(missionVision) > 150 ? "text-red-600" : "text-gray-500"}`}
+                  >
                     {wordCount(missionVision)}/150 words
                   </p>
                 </CardContent>
@@ -605,7 +817,7 @@ export const Signup: React.FC = () => {
                 <Button
                   type="button"
                   variant="outline"
-                  onClick={() => setStep('profile')}
+                  onClick={() => setStep("profile")}
                   className="flex-1 h-12 border-2"
                 >
                   Back
@@ -613,7 +825,10 @@ export const Signup: React.FC = () => {
                 <Button
                   type="submit"
                   className="flex-1 h-12 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-base font-semibold"
-                  disabled={wordCount(highPerformerDefinition) > 150 || wordCount(missionVision) > 150}
+                  disabled={
+                    wordCount(highPerformerDefinition) > 150 ||
+                    wordCount(missionVision) > 150
+                  }
                 >
                   Complete Setup & Go to Dashboard
                 </Button>
@@ -633,14 +848,32 @@ export const Signup: React.FC = () => {
         <div className="absolute inset-0 flex items-center justify-center p-12">
           <div className="text-white text-center space-y-6">
             <h2 className="text-5xl font-bold">
-              {step === 'account' && (<>Join Thousands of <br />Successful Employers</>)}
-              {step === 'profile' && (<>Build Your Dream <br />Team Today</>)}
-              {step === 'onboarding' && (<>Find Perfect <br />Culture Fits</>)}
+              {step === "account" && (
+                <>
+                  Join Thousands of <br />
+                  Successful Employers
+                </>
+              )}
+              {step === "profile" && (
+                <>
+                  Build Your Dream <br />
+                  Team Today
+                </>
+              )}
+              {step === "onboarding" && (
+                <>
+                  Find Perfect <br />
+                  Culture Fits
+                </>
+              )}
             </h2>
             <p className="text-xl text-red-100 max-w-lg mx-auto">
-              {step === 'account' && 'Create up to 3 active jobs, assess candidates with AI-powered tools, and make data-driven hiring decisions.'}
-              {step === 'profile' && 'Set up your company profile and start posting jobs in minutes. Get access to quality candidates instantly.'}
-              {step === 'onboarding' && 'Our AI matches candidates not just by skills, but by cultural fit and work style preferences.'}
+              {step === "account" &&
+                "Create up to 3 active jobs, assess candidates with AI-powered tools, and make data-driven hiring decisions."}
+              {step === "profile" &&
+                "Set up your company profile and start posting jobs in minutes. Get access to quality candidates instantly."}
+              {step === "onboarding" &&
+                "Our AI matches candidates not just by skills, but by cultural fit and work style preferences."}
             </p>
             <div className="grid grid-cols-3 gap-6 mt-12 max-w-xl mx-auto">
               <div>

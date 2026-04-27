@@ -1,5 +1,5 @@
 import React from 'react';
-import logoImage from 'figma:asset/c2812c1c57b7f108fcb4af39eaa6cb50ec1bdd69.png';
+import logoImage from '@/assets/rexruiter-logo.png';
 import { Outlet, useNavigate, useLocation } from 'react-router';
 import { Button } from '@/app/components/ui/button';
 import { Home, Plus, Briefcase, User, Settings, FileText, ChevronLeft, ChevronRight, Bell, LogOut, Shield } from 'lucide-react';
